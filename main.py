@@ -4,9 +4,10 @@ import plotly.subplots as sp
 import pandas as pd
 
 
-st.set_page_config('Busiess Analytics Dashboard',page_icon='',layout='wide' )
+st.set_page_config('Business Analytics Dashboard',page_icon='📊',layout='wide' )
 
-st.markdown("<h1 style='text-align: center;'>Busiess Analytics Dashboard</h1>", unsafe_allow_html=True)
+st.write('Hecho Por Jhon Kerly Mosquera')
+st.markdown("<h1 style='text-align: center;'>Business Analytics Dashboard 📊</h1>", unsafe_allow_html=True)
 theme_plotly=None
 df =pd.read_csv('customers.csv')
 
