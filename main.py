@@ -96,7 +96,7 @@ def promedio_salario_dep():
     promedio_salarios = df_selecionado.groupby('Department')['AnnualSalary'].mean().reset_index()
 
     # Crear el gráfico de barras para el promedio de salarios por departamento
-    fig = px.bar(promedio_salarios, x='Department', y='AnnualSalary',color='Department',
+    fig = px.bar(promedio_salarios, x='Department', y='AnnualSalary',color='Department', text_auto=' .2s',
                 labels={'Departamento': 'Departamento', 'Salario': 'Promedio de Salario'},
                 title='Promedio de Salarios por Departamento')
 
@@ -109,7 +109,7 @@ def promedio_salario_gender():
     promedio_salarios = df_selecionado.groupby('Gender')['AnnualSalary'].mean().reset_index()
 
     # Crear el gráfico de barras para el promedio de salarios por departamento
-    fig = px.bar(promedio_salarios, x='Gender', y='AnnualSalary',color='Gender',
+    fig = px.bar(promedio_salarios, x='Gender', y='AnnualSalary',color='Gender', text_auto=' .2s',
                 labels={'Gender': 'Genero', 'Salario': 'Promedio de Salario'},
                 title='Promedio de Salarios por Genero')
 
@@ -122,7 +122,7 @@ def promedio_salario_age():
     promedio_salarios = df_selecionado.groupby('Age')['AnnualSalary'].mean().reset_index()
 
     # Crear el gráfico de barras para el promedio de salarios por departamento
-    fig = px.bar(promedio_salarios, x='Age', y='AnnualSalary',color='Age',
+    fig = px.bar(promedio_salarios, x='Age', y='AnnualSalary',color='Age', text_auto=' .2s',
                 labels={'Gender': 'Genero', 'Salario': 'Promedio de Salario'},
                 title='Promedio de Salarios por Eda')
 
@@ -134,7 +134,7 @@ def Bonus_pais():
     promedio_salarios = df_selecionado.groupby('Country')['Bonus'].mean().reset_index()
 
     # Crear el gráfico de barras para el promedio de salarios por departamento
-    fig = px.bar(promedio_salarios, x='Country', y='Bonus',color='Country',
+    fig = px.bar(promedio_salarios, x='Country', y='Bonus',color='Country', text_auto=' .2s',
                 labels={'Gender': 'Genero', 'Salario': 'Promedio de Salario'},
                 title='Promedio de Salarios por País')
 
