@@ -134,8 +134,8 @@ def Bonus_pais():
     promedio_salarios = df_selecionado.groupby('Country')['Bonus'].mean().reset_index()
 
     # Crear el gráfico de barras para el promedio de salarios por departamento
-    fig = px.bar(promedio_salarios, x='Country', y='Bonus',color='Country', text_auto=' .2s',
-                labels={'Gender': 'Genero', 'Salario': 'Promedio de Salario'},
+    fig = px.bar(promedio_salarios, x='Country', y='Bonus',color='Country',
+                labels={'Gender': 'Genero', 'Salario': 'Promedio de Bonus'},
                 title='Promedio de Bonus por País')
 
     # Mostrar el gráfico
