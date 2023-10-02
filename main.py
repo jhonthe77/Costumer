@@ -51,7 +51,7 @@ def metricas():
     col1,col2,col3=st.columns(3)
 
     col1.metric(label='Total De Empleados ',value=f'N° {df_selecionado.EEID.count()}',delta='Total De Empleados')
-    col2.metric(label='Salario Anual',value=f'$ {df_selecionado.AnnualSalary.sum():,.0f}',delta='Suma Total de los Salarios')
+    col2.metric(label='Salario Anual',value=f'$ {df_selecionado.AnnualSalary.sum():,.0f}',delta='Suma Total De Los Salarios')
     col3.metric(label='Salario Anual',value=f'$ {df_selecionado.AnnualSalary.max():,.0f}',delta='Salario Mas Alto')
     style_metric_cards(background_color='black',border_left_color='white')
 
