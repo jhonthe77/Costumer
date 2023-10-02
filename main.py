@@ -29,7 +29,7 @@ st.markdown(
 df.set_index('id',inplace=True)
 st.sidebar.header('Filtar Los Datos 🔎')
 Department=st.sidebar.multiselect(
-    label='filtre por departamento',
+    label='Filtre Por Departamento',
     options=df['Department'].unique(),
     default=df['Department'].unique()[:2]
 )
