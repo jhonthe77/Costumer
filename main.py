@@ -50,7 +50,7 @@ def metricas():
     from streamlit_extras.metric_cards import style_metric_cards
     col1,col2,col3=st.columns(3)
 
-    col1.metric(label='Total de Empleados ',value=f'N° {df_selecionado.EEID.count()}',delta='Total de Empleados')
+    col1.metric(label='Total De Empleados ',value=f'N° {df_selecionado.EEID.count()}',delta='Total De Empleados')
     col2.metric(label='Salario Anual',value=f'$ {df_selecionado.AnnualSalary.sum():,.0f}',delta='Suma Total de los Salarios')
     col3.metric(label='Salario Anual',value=f'$ {df_selecionado.AnnualSalary.max():,.0f}',delta='Salario Mas Alto')
     style_metric_cards(background_color='black',border_left_color='white')
@@ -61,7 +61,7 @@ metricas()
 div1,div2=st.columns (2)
 def pie():
     with div1:
-        fig=px.pie(df_selecionado, values="AnnualSalary", names= "Department", title='Salarios por Departamento')
+        fig=px.pie(df_selecionado, values="AnnualSalary", names= "Department", title='Salarios Por Departamento')
         fig. update_layout (legend_title="Department", legend_y=0.9)
         fig.update_traces (textinfo="percent+label", textposition="inside")
         st.plotly_chart(fig,use_container_width=True, theme=theme_plotly)
@@ -70,7 +70,7 @@ pie()
 def bar():
     with div2:
         
-        fig=px.bar (df_selecionado,y="AnnualSalary", x= "Department", text_auto=' .2s', title="Salarios por Departamento")
+        fig=px.bar (df_selecionado,y="AnnualSalary", x= "Department", text_auto=' .2s', title="Salarios Por Departamento")
         fig.update_traces(textfont_size=18, textangle=0, textposition="outside" ,cliponaxis=False)
         st.plotly_chart(fig,use_container_width=True, theme=theme_plotly)
 bar ()
