@@ -136,7 +136,7 @@ def Bonus_pais():
     # Crear el gráfico de barras para el promedio de salarios por departamento
     fig = px.bar(promedio_salarios, x='Country', y='Bonus',color='Country', text_auto=' .2s',
                 labels={'Gender': 'Genero', 'Salario': 'Promedio de Salario'},
-                title='Promedio de Salarios por País')
+                title='Promedio de Bonus por País')
 
     # Mostrar el gráfico
     st.plotly_chart(fig, use_container_width=True,theme=theme_plotly)
