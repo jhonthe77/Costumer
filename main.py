@@ -96,7 +96,7 @@ def promedio_salario_dep():
     promedio_salarios = df_selecionado.groupby('Department')['AnnualSalary'].mean().reset_index()
 
     # Crear el gráfico de barras para el promedio de salarios por departamento
-    fig = px.bar(promedio_salarios, x='Department', y='AnnualSalary',color='Department', text_auto=' .2s',
+    fig = px.bar(promedio_salarios, x='Department', y='AnnualSalary',color='Department',
                 labels={'Departamento': 'Departamento', 'Salario': 'Promedio de Salario'},
                 title='Promedio de Salarios por Departamento')
 
@@ -109,7 +109,7 @@ def promedio_salario_gender():
     promedio_salarios = df_selecionado.groupby('Gender')['AnnualSalary'].mean().reset_index()
 
     # Crear el gráfico de barras para el promedio de salarios por departamento
-    fig = px.bar(promedio_salarios, x='Gender', y='AnnualSalary',color='Gender', text_auto=' .2s',
+    fig = px.bar(promedio_salarios, x='Gender', y='AnnualSalary',color='Gender',
                 labels={'Gender': 'Genero', 'Salario': 'Promedio de Salario'},
                 title='Promedio de Salarios por Genero')
 
