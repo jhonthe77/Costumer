@@ -27,19 +27,19 @@ st.markdown(
 )
 
 df.set_index('id',inplace=True)
-st.sidebar.header('Filtar Los Datos')
+st.sidebar.header('Filtar Los Datos 🔎')
 Department=st.sidebar.multiselect(
     label='filtre por departamento',
     options=df['Department'].unique(),
     default=df['Department'].unique()[:2]
 )
 Country=st.sidebar.multiselect(
-    label='filtre por Pasí',
+    label='Filtre Por Pasí 🔎',
     options=df['Country'].unique(),
     default=df['Country'].unique()[:2]
 )
 BusinessUnit=st.sidebar.multiselect(
-    label='filtre por unidad de negocios',
+    label='Filtre Por Unidad De Negocios 🔎',
     options=df['BusinessUnit'].unique(),
     default=df['BusinessUnit'].unique()[:2]
 )
