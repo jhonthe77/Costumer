@@ -4,10 +4,10 @@ import plotly.subplots as sp
 import pandas as pd
 
 
-st.set_page_config('Panel de análisis empresarial',page_icon='📊',layout='wide' )
+st.set_page_config('Panel De Análisis Empresarial',page_icon='📊',layout='wide' )
 
 st.write('Hecho Por Jhon Kerly Mosquera')
-st.markdown("<h1 style='text-align: center;'>Panel de análisis empresarial 📊</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center;'>Panel De Análisis Empresarial 📊</h1>", unsafe_allow_html=True)
 theme_plotly=None
 df =pd.read_csv('customers.csv')
 
