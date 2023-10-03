@@ -149,21 +149,4 @@ def top_10_maax_salario():
 
 top_10_maax_salario()
 
-import streamlit as st
 
-# Lee el valor actual del contador desde un archivo
-try:
-    with open('contador.txt', 'r') as file:
-        contador = int(file.read())
-except FileNotFoundError:
-    contador = 0
-
-# Incrementa el contador
-contador += 1
-
-# Guarda el nuevo valor del contador en el archivo
-with open('contador.txt', 'w') as file:
-    file.write(str(contador))
-
-# Muestra el contador
-st.write(f'Esta aplicación ha sido abierta {contador} veces.')
