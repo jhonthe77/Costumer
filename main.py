@@ -73,7 +73,7 @@ metricas()
 div1,div2=st.columns (2)
 def pie():
     with div1:
-        fig=px.pie(df_selecionado, values="AnnualSalary", names= "Department", title='Salarios Por Departamento')
+        fig=px.pie(df_selecionado, values="AnnualSalary",hole=0.3, names= "Department", title='Salarios Por Departamento')
         fig. update_layout (legend_title="Department", legend_y=0.9)
         fig.update_traces (textinfo="percent+label", textposition="inside")
         st.plotly_chart(fig,use_container_width=True, theme=theme_plotly)
@@ -137,7 +137,7 @@ promedio_salario_gender()
 def gender_porcentaje():
     with div_pie:
         conteo_genero = df_selecionado['Gender'].value_counts()
-        fig=px.pie(df_selecionado, values=conteo_genero.values, names=conteo_genero.index, title='Distribucion de Genero')
+        fig=px.pie(df_selecionado, values=conteo_genero.values,hole=0.3, names=conteo_genero.index, title='Distribucion de Genero')
         fig. update_layout (legend_title="Genero", legend_y=0.9)
         fig.update_traces (textinfo="percent+label", textposition="inside")
         st.plotly_chart(fig,use_container_width=True, theme=theme_plotly)
@@ -176,7 +176,7 @@ Bonus_pais()
 def salary_bonus():
      with div_pi_sal:   
         salary_bonus = df_selecionado.groupby('Country')['TotalSalary'].sum().reset_index()
-        fig=px.pie(salary_bonus,values='TotalSalary',names='Country', title='Salarios Con Bonos Por País')
+        fig=px.pie(salary_bonus,values='TotalSalary',names='Country',hole=0.3, title='Salarios Con Bonos Por País')
         fig.update_layout(legend_title="Country", legend_y=0.9)
         fig.update_traces(textinfo="percent+label", textposition="inside")
         st.plotly_chart(fig,use_container_width=True, theme=theme_plotly)
@@ -209,6 +209,45 @@ def bonus_mean_region():
         st.plotly_chart(fig, use_container_width=True,theme=theme_plotly)
 bonus_mean_region()
 
+jot_pie,jot_table=st.columns(2)
+def Gender_Jot_pie():
+    with jot_pie:
+        grouped = df_selecionado.groupby(['JobTitle', 'Gender']).size().reset_index(name='Count')
+    # Graficar en un gráfico de pastel
+        # Graficar en un gráfico de pastel
+        fig = px.pie(grouped, names='JobTitle', values='Count', 
+                title='Conteo General por género en cada tipo de empleo', 
+                color='JobTitle', hole=0.3,
+                labels={'Gender': 'Género'},
+                custom_data=['JobTitle']
+            )  # Agregar el tipo de empleo como custom_data
+        st.plotly_chart(fig, use_container_width=True,theme=theme_plotly)
+Gender_Jot_pie()
+
+
+def Gender_Jot_table():
+    with jot_table:
+        grouped = df_selecionado.groupby(['JobTitle', 'Gender']).size().reset_index(name='Count')
+        st.markdown("<h6 style='text-align: center;'>Tabla de Conteo por género en cada tipo de empleo </h6>", unsafe_allow_html=True)
+        st.dataframe(grouped,use_container_width=True)
+Gender_Jot_table()
+
+
+def Gender_Jot_bar():
+    grouped = df_selecionado.groupby(['JobTitle', 'Gender']).size().reset_index(name='Count')
+# Graficar en un gráfico de pastel
+    # Graficar en un gráfico de pastel
+    fig = px.bar(grouped, x='JobTitle', y='Count', color='Gender', 
+             title='Conteo por género en cada tipo de empleo',
+             labels={'Gender': 'Género'},
+             text='Count', 
+             barmode='group',height=500)
+
+    fig.update_traces(texttemplate='%{text}', textposition='outside') # Agregar el tipo de empleo como custom_data
+    st.plotly_chart(fig, use_container_width=True,theme=theme_plotly)
+Gender_Jot_bar()
+
+
 def top_10_city_salario_max():
     df_top_10=df_selecionado.groupby('City')['AnnualSalary'].sum().sort_values().head(10)
     fig=px.bar(df_top_10,color=df_top_10.index)
@@ -229,3 +268,4 @@ top_10_maax_salario()
 
 st.markdown("<h1 style='text-align: center;'>Datos Utilizados</h1>", unsafe_allow_html=True)
 st.dataframe(df_selecionado)
+
