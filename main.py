@@ -176,25 +176,30 @@ def salary_bonus():
 
 salary_bonus()
 
+d_reg1, d_reg2=st.columns(2)
 def salior_mean_region():
-    # Calcular el promedio de salarios por departamento
-    promedio_salarios = df_selecionado.groupby('Ethnicity')['AnnualSalary'].mean().reset_index()
-    # Crear el gráfico de barras para el promedio de salarios por departamento
-    fig = px.bar(promedio_salarios, x='Ethnicity', y='AnnualSalary',color='Ethnicity',
-                labels={'Ethnicity': 'Etnicidad', 'Salario': 'Promedio de Salario'},
-                title='Promedio de Salario por Etnicidad')
-    # Mostrar el gráfico
-    st.plotly_chart(fig, use_container_width=True,theme=theme_plotly)
+    with d_reg1:
+        # Calcular el promedio de salarios por departamento
+        promedio_salarios = df_selecionado.groupby('Ethnicity')['AnnualSalary'].mean().reset_index()
+        # Crear el gráfico de barras para el promedio de salarios por departamento
+        fig = px.bar(promedio_salarios, x='Ethnicity', y='AnnualSalary',color='Ethnicity',
+                    labels={'Ethnicity': 'Etnicidad', 'Salario': 'Promedio de Salario'},
+                    title='Promedio de Salario por Etnicidad')
+        # Mostrar el gráfico
+        st.plotly_chart(fig, use_container_width=True,theme=theme_plotly)
 salior_mean_region()
+
+
 def bonus_mean_region():
+     with d_reg2:   
     # Calcular el promedio de salarios por departamento
-    promedio_salarios = df_selecionado.groupby('Ethnicity')['Bonus'].mean().reset_index()
-    # Crear el gráfico de barras para el promedio de salarios por departamento
-    fig = px.bar(promedio_salarios, x='Ethnicity', y='Bonus',color='Ethnicity',
-                labels={'Ethnicity': 'Etnicidad', 'Bonus': 'Promedio de Bonus'},
-                title='Promedio de Bonus por Etnicidad')
-    # Mostrar el gráfico
-    st.plotly_chart(fig, use_container_width=True,theme=theme_plotly)
+        promedio_salarios = df_selecionado.groupby('Ethnicity')['Bonus'].mean().reset_index()
+        # Crear el gráfico de barras para el promedio de salarios por departamento
+        fig = px.bar(promedio_salarios, x='Ethnicity', y='Bonus',color='Ethnicity',
+                    labels={'Ethnicity': 'Etnicidad', 'Bonus': 'Promedio de Bonus'},
+                    title='Promedio de Bonus por Etnicidad')
+        # Mostrar el gráfico
+        st.plotly_chart(fig, use_container_width=True,theme=theme_plotly)
 bonus_mean_region()
 
 def top_10_maax_salario():
