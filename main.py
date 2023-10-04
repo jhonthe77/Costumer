@@ -230,8 +230,9 @@ def Gender_Jot_pie():
                 title='Conteo General por género en cada tipo de empleo', 
                 color='JobTitle', hole=0.3,
                 labels={'Gender': 'Género'},
-                custom_data=['JobTitle']
+                custom_data=['JobTitle'],width=700,
             )  # Agregar el tipo de empleo como custom_data
+        fig.update_layout(margin=dict(t=30, b=0, l=0, r=30))
         st.plotly_chart(fig, use_container_width=True,theme=theme_plotly)
 Gender_Jot_pie()
 
