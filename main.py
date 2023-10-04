@@ -48,8 +48,13 @@ BusinessUnit=st.sidebar.multiselect(
     options=df['BusinessUnit'].unique(),
     default=df['BusinessUnit'].unique()[:2]
 )
+Gender=st.sidebar.multiselect(
+    label='Filtre Por Genero 🔎',
+    options=df['Gender'].unique(),
+    default=df['Gender'].unique()[:2]
+)
 
-df_selecionado= df.query('Department==@Department & Country==@Country & BusinessUnit==@BusinessUnit')
+df_selecionado= df.query('Department==@Department & Country==@Country & BusinessUnit==@BusinessUnit & Gender==@Gender')
 
 def metricas():
     max_salary_index = df_selecionado['AnnualSalary'].idxmax()
