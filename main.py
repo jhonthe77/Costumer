@@ -227,3 +227,4 @@ def top_10_maax_salario():
 top_10_maax_salario()
 
 
+st.dataframe(df_selecionado)
