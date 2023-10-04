@@ -219,9 +219,10 @@ def top_10_city_salario_max():
 top_10_city_salario_max()
 
 def top_10_maax_salario():
-    df_top_10=df_selecionado.sort_values(by='AnnualSalary',ascending=False).head(10)
+    df_top_10=df_selecionado.groupby('FullName')['AnnualSalary'].sum().sort_values().head(10)
+    fig=px.bar(df_top_10,color=df_top_10.index)
     st.markdown("<h1 style='text-align: center;'>Top 10 De Los Empleados Con Mayor Salarios</h1>", unsafe_allow_html=True)
-    st.dataframe(df_top_10,)
+    st.plotly_chart(fig, use_container_width=True,theme=theme_plotly)
 
 top_10_maax_salario()
 
