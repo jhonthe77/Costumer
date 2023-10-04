@@ -104,18 +104,33 @@ def promedio_salario_dep():
     st.plotly_chart(fig, use_container_width=True,theme=theme_plotly)
 promedio_salario_dep()
 
+div_pie,div_bar=st.columns(2)
+
 def promedio_salario_gender():
-    # Calcular el promedio de salarios por departamento
-    promedio_salarios = df_selecionado.groupby('Gender')['AnnualSalary'].mean().reset_index()
+    with div_bar:
+        # Calcular el promedio de salarios por departamento
+        promedio_salarios = df_selecionado.groupby('Gender')['AnnualSalary'].mean().reset_index()
 
-    # Crear el gráfico de barras para el promedio de salarios por departamento
-    fig = px.bar(promedio_salarios, x='Gender', y='AnnualSalary',color='Gender',
-                labels={'Gender': 'Genero', 'Salario': 'Promedio de Salario'},
-                title='Promedio de Salarios por Genero')
+        # Crear el gráfico de barras para el promedio de salarios por departamento
+        fig = px.bar(promedio_salarios, x='Gender', y='AnnualSalary',color='Gender',
+                    labels={'Gender': 'Genero', 'Salario': 'Promedio de Salario'},
+                    title='Promedio de Salarios por Genero')
 
-    # Mostrar el gráfico
-    st.plotly_chart(fig, use_container_width=True,theme=theme_plotly)
+        # Mostrar el gráfico
+        st.plotly_chart(fig, use_container_width=True,theme=theme_plotly)
 promedio_salario_gender()
+
+
+
+def gender_porcentaje():
+    with div_pie:
+        conteo_genero = df_selecionado['Gender'].value_counts()
+        fig=px.pie(df_selecionado, values=conteo_genero.values, names=conteo_genero.index, title='Distribucion de Genero')
+        fig. update_layout (legend_title="Genero", legend_y=0.9)
+        fig.update_traces (textinfo="percent+label", textposition="inside")
+        st.plotly_chart(fig,use_container_width=True, theme=theme_plotly)
+
+gender_porcentaje()
 
 def promedio_salario_age():
     # Calcular el promedio de salarios por departamento
@@ -129,6 +144,8 @@ def promedio_salario_age():
     # Mostrar el gráfico
     st.plotly_chart(fig, use_container_width=True,theme=theme_plotly)
 promedio_salario_age()
+
+
 def Bonus_pais():
     # Calcular el promedio de salarios por departamento
     promedio_salarios = df_selecionado.groupby('Country')['Bonus'].mean().reset_index()
@@ -141,6 +158,20 @@ def Bonus_pais():
     # Mostrar el gráfico
     st.plotly_chart(fig, use_container_width=True,theme=theme_plotly)
 Bonus_pais()
+
+
+def salior_mean_region():
+    # Calcular el promedio de salarios por departamento
+    promedio_salarios = df_selecionado.groupby('Ethnicity')['AnnualSalary'].mean().reset_index()
+
+    # Crear el gráfico de barras para el promedio de salarios por departamento
+    fig = px.bar(promedio_salarios, x='Ethnicity', y='AnnualSalary',color='Ethnicity',
+                labels={'Ethnicity': 'Etnicidad', 'Salario': 'Promedio de Salario'},
+                title='Promedio de Salario por Etnicidad')
+
+    # Mostrar el gráfico
+    st.plotly_chart(fig, use_container_width=True,theme=theme_plotly)
+salior_mean_region()
 
 def top_10_maax_salario():
     df_top_10=df_selecionado.sort_values(by='AnnualSalary',ascending=False).head(10)
