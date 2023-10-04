@@ -64,7 +64,7 @@ def metricas():
     col2.metric(label='Salario Anual',value=f'$ {df_selecionado.AnnualSalary.sum():,.0f}',delta='Suma Total De Los Salarios')
     col3.metric(label='Salario Anual',value=f'$ {df_selecionado.AnnualSalary.max():,.0f}',delta='Salario Mas Alto')
     col4.metric(label='Empleado con el salario mas alto',value=employee_id_max_salary,delta=f'Salario Mas Alto $ {df_selecionado.AnnualSalary.max():,.0f}')
-    col5.metric(label='Empleado con el salario mas Bajo',value=employee_id_min_salary,delta=f'Salario Mas Alto $ {df_selecionado.AnnualSalary.min():,.0f}')
+    col5.metric(label='Empleado con el salario mas Bajo',value=employee_id_min_salary,delta=f'Salario Mas Bajo $ {df_selecionado.AnnualSalary.min():,.0f}')
     style_metric_cards(background_color='black',border_left_color='white')
 
 
