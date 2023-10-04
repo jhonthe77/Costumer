@@ -169,7 +169,7 @@ Bonus_pais()
 def salary_bonus():
      with div_pi_sal:   
         salary_bonus = df_selecionado.groupby('Country')['TotalSalary'].sum().reset_index()
-        fig=px.pie(salary_bonus,values='TotalSalary',names='Country', title='Salarios Con Bonos')
+        fig=px.pie(salary_bonus,values='TotalSalary',names='Country', title='Salarios Con Bonos Por País')
         fig.update_layout(legend_title="Country", legend_y=0.9)
         fig.update_traces(textinfo="percent+label", textposition="inside")
         st.plotly_chart(fig,use_container_width=True, theme=theme_plotly)
@@ -183,10 +183,19 @@ def salior_mean_region():
     fig = px.bar(promedio_salarios, x='Ethnicity', y='AnnualSalary',color='Ethnicity',
                 labels={'Ethnicity': 'Etnicidad', 'Salario': 'Promedio de Salario'},
                 title='Promedio de Salario por Etnicidad')
-
     # Mostrar el gráfico
     st.plotly_chart(fig, use_container_width=True,theme=theme_plotly)
 salior_mean_region()
+def bonus_mean_region():
+    # Calcular el promedio de salarios por departamento
+    promedio_salarios = df_selecionado.groupby('Ethnicity')['Bonus'].mean().reset_index()
+    # Crear el gráfico de barras para el promedio de salarios por departamento
+    fig = px.bar(promedio_salarios, x='Ethnicity', y='Bonus',color='Ethnicity',
+                labels={'Ethnicity': 'Etnicidad', 'Bonus': 'Promedio de Bonus'},
+                title='Promedio de Bonus por Etnicidad')
+    # Mostrar el gráfico
+    st.plotly_chart(fig, use_container_width=True,theme=theme_plotly)
+bonus_mean_region()
 
 def top_10_maax_salario():
     df_top_10=df_selecionado.sort_values(by='AnnualSalary',ascending=False).head(10)
