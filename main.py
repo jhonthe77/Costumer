@@ -13,6 +13,11 @@ df =pd.read_csv('customers.csv')
 
 df['HireDate'] =pd.to_datetime(df['HireDate'])
 
+df['Bonus'] = df['AnnualSalary'] * (df['Bonus'] / 100)
+
+# Sumar el bonus al salario
+df['TotalSalary'] = df['AnnualSalary'] + df['Bonus']
+
 
 st.markdown(
     """
@@ -145,25 +150,35 @@ def promedio_salario_age():
     st.plotly_chart(fig, use_container_width=True,theme=theme_plotly)
 promedio_salario_age()
 
+div_bar_et,div_pi_sal= st.columns(2)
 
 def Bonus_pais():
+    with div_bar_et:
     # Calcular el promedio de salarios por departamento
-    promedio_salarios = df_selecionado.groupby('Country')['Bonus'].mean().reset_index()
+        promedio_salarios = df_selecionado.groupby('Country')['Bonus'].mean().reset_index()
 
-    # Crear el gráfico de barras para el promedio de salarios por departamento
-    fig = px.bar(promedio_salarios, x='Country', y='Bonus',color='Country',
-                labels={'Gender': 'Genero', 'Salario': 'Promedio de Bonus'},
-                title='Promedio de Bonus por País')
+        # Crear el gráfico de barras para el promedio de salarios por departamento
+        fig = px.bar(promedio_salarios, x='Country', y='Bonus',color='Country',
+                    labels={'Gender': 'Genero', 'Salario': 'Promedio de Bonus'},
+                    title='Promedio de Bonus por País')
 
-    # Mostrar el gráfico
-    st.plotly_chart(fig, use_container_width=True,theme=theme_plotly)
+        # Mostrar el gráfico
+        st.plotly_chart(fig, use_container_width=True,theme=theme_plotly)
 Bonus_pais()
 
+def salary_bonus():
+     with div_pi_sal:   
+        salary_bonus = df_selecionado.groupby('Country')['TotalSalary'].sum().reset_index()
+        fig=px.pie(salary_bonus,values='TotalSalary',names='Country', title='Salarios Con Bonos')
+        fig.update_layout(legend_title="Country", legend_y=0.9)
+        fig.update_traces(textinfo="percent+label", textposition="inside")
+        st.plotly_chart(fig,use_container_width=True, theme=theme_plotly)
+
+salary_bonus()
 
 def salior_mean_region():
     # Calcular el promedio de salarios por departamento
     promedio_salarios = df_selecionado.groupby('Ethnicity')['AnnualSalary'].mean().reset_index()
-
     # Crear el gráfico de barras para el promedio de salarios por departamento
     fig = px.bar(promedio_salarios, x='Ethnicity', y='AnnualSalary',color='Ethnicity',
                 labels={'Ethnicity': 'Etnicidad', 'Salario': 'Promedio de Salario'},
