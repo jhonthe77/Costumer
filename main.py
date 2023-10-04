@@ -2,6 +2,7 @@ import streamlit as st
 import plotly.express as px
 import plotly.subplots as sp
 import pandas as pd
+import plotly.graph_objects as go
 
 
 st.set_page_config('Panel De Análisis Empresarial',page_icon='📊',layout='wide' )
@@ -283,6 +284,60 @@ def top_10_maax_salario():
 top_10_maax_salario()
 
 
+
+
+div_55,div_5=st.columns(2)
+
+def Gender_Job_bar_55plus():
+        # Filtrar empleados mayores a 55 años
+        df_filtered = df_selecionado[df_selecionado['Age'] > 55]
+
+        # Calcular el promedio de empleados mayores a 55 años por tipo de empleo
+        mean_by_job_title = df_filtered.groupby('JobTitle').size().reset_index(name='mean')
+
+        # Calcular la media
+        mean_value = mean_by_job_title['mean'].mean()
+
+        # Graficar en un gráfico de barras
+        fig = px.bar(mean_by_job_title, x='JobTitle', y='mean',color= 'JobTitle',
+                    title='Promedio de empleados mayores a 55 años por tipo de empleo',
+                    labels={'JobTitle': 'Tipo de Empleo', 'mean': 'Promedio de Empleados'},
+                    height=500)
+
+        # Agregar línea de la media
+        fig.add_trace(go.Scatter(x=mean_by_job_title['JobTitle'], y=[mean_value] * len(mean_by_job_title['JobTitle']),
+                                mode='lines', name='Media', line=dict(color='green', dash='dash')))
+
+        fig.update_traces(texttemplate='%{y}')
+        fig.add_annotation(x=0, y=mean_value, text=f'Media: {mean_value:.2f}', showarrow=False,
+                        font=dict(size=12, color='white'), yshift=10)
+        st.plotly_chart(fig, use_container_width=True,theme=theme_plotly)
+
+Gender_Job_bar_55plus()
+
+
+def Gender_Job_bar_plus():
+    # Filtrar empleados menores a 55 años
+    df_filtered = df_selecionado[df_selecionado['Age'] < 55]
+
+    # Calcular el promedio de empleados mayores a 55 años por tipo de empleo
+    mean_by_job_title = df_filtered.groupby('JobTitle').size().reset_index(name='mean')
+    mean_value = mean_by_job_title['mean'].mean()
+
+    # Graficar en un gráfico de barras
+    fig = px.bar(mean_by_job_title, x='JobTitle', y='mean', color= 'JobTitle',
+                 title='Promedio de empleados menores a 55 años por tipo de empleo',
+                 labels={'JobTitle': 'Tipo de Empleo', 'mean': 'Promedio de Empleados'},
+                 height=500)
+
+    fig.add_trace(go.Scatter(x=mean_by_job_title['JobTitle'], y=[mean_value] * len(mean_by_job_title['JobTitle']),
+                             mode='lines', name='Media', line=dict(color='green', dash='dash')))
+    fig.add_annotation(x=0, y=mean_value, text=f'Media: {mean_value:.2f}', showarrow=False,
+                       font=dict(size=12, color='white'), yshift=10)
+    fig.update_traces(texttemplate='%{y}')
+    st.plotly_chart(fig, use_container_width=True,theme=theme_plotly)
+
+Gender_Job_bar_plus()
+
 st.markdown("<h1 style='text-align: center;'>Datos Utilizados</h1>", unsafe_allow_html=True)
 st.dataframe(df_selecionado)
-
