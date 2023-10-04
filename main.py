@@ -210,11 +210,13 @@ def bonus_mean_region():
 bonus_mean_region()
 
 def top_10_city_salario_max():
-    df_top_10=df_selecionado.groupby('City').head(10)
-    st.markdown("<h1 style='text-align: center;'>Top 10 De Los Empleados Con Mayor Salarios</h1>", unsafe_allow_html=True)
-    st.dataframe(df_top_10,)
+    df_top_10=df_selecionado.groupby('City')['AnnualSalary'].sum().sort_values().head(10)
+    fig=px.bar(df_top_10,color=df_top_10.index)
+    st.markdown("<h1 style='text-align: center;'>Top 10 De Las Ciudades Con Mayor Salarios</h1>", unsafe_allow_html=True)
+    st.plotly_chart(fig, use_container_width=True,theme=theme_plotly)
     
-
+    
+top_10_city_salario_max()
 
 def top_10_maax_salario():
     df_top_10=df_selecionado.sort_values(by='AnnualSalary',ascending=False).head(10)
