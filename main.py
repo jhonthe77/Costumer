@@ -52,12 +52,19 @@ BusinessUnit=st.sidebar.multiselect(
 df_selecionado= df.query('Department==@Department & Country==@Country & BusinessUnit==@BusinessUnit')
 
 def metricas():
+    max_salary_index = df_selecionado['AnnualSalary'].idxmax()
+    employee_id_max_salary = df_selecionado.loc[max_salary_index, 'FullName']
+    min_salary_index = df_selecionado['AnnualSalary'].idxmin()
+    employee_id_min_salary = df_selecionado.loc[min_salary_index, 'FullName']
+
     from streamlit_extras.metric_cards import style_metric_cards
-    col1,col2,col3=st.columns(3)
+    col1,col2,col3,col4,col5=st.columns(5)
 
     col1.metric(label='Total De Empleados ',value=f'N° {df_selecionado.EEID.count()}',delta='Total De Empleados')
     col2.metric(label='Salario Anual',value=f'$ {df_selecionado.AnnualSalary.sum():,.0f}',delta='Suma Total De Los Salarios')
     col3.metric(label='Salario Anual',value=f'$ {df_selecionado.AnnualSalary.max():,.0f}',delta='Salario Mas Alto')
+    col4.metric(label='Empleado con el salario mas alto',value=employee_id_max_salary,delta=f'Salario Mas Alto $ {df_selecionado.AnnualSalary.max():,.0f}')
+    col5.metric(label='Empleado con el salario mas Bajo',value=employee_id_min_salary,delta=f'Salario Mas Alto $ {df_selecionado.AnnualSalary.min():,.0f}')
     style_metric_cards(background_color='black',border_left_color='white')
 
 
@@ -201,6 +208,13 @@ def bonus_mean_region():
         # Mostrar el gráfico
         st.plotly_chart(fig, use_container_width=True,theme=theme_plotly)
 bonus_mean_region()
+
+def top_10_city_salario_max():
+    df_top_10=df_selecionado.groupby('City').head(10)
+    st.markdown("<h1 style='text-align: center;'>Top 10 De Los Empleados Con Mayor Salarios</h1>", unsafe_allow_html=True)
+    st.dataframe(df_top_10,)
+    
+
 
 def top_10_maax_salario():
     df_top_10=df_selecionado.sort_values(by='AnnualSalary',ascending=False).head(10)
