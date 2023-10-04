@@ -56,7 +56,7 @@ Gender=st.sidebar.multiselect(
 Ethnicity=st.sidebar.multiselect(
     label='Filtre Por Etnicidad 🔎',
     options=df['Ethnicity'].unique(),
-    default=df['Ethnicity'].unique()[:-1]
+    default=df['Ethnicity'].unique()[:]
 )
 
 df_selecionado= df.query('Department==@Department & Country==@Country & BusinessUnit==@BusinessUnit & Gender==@Gender & Ethnicity==@Ethnicity')
