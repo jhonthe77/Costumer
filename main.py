@@ -247,15 +247,22 @@ def Gender_Jot_bar():
     grouped = df_selecionado.groupby(['JobTitle', 'Gender']).size().reset_index(name='Count')
 # Graficar en un gráfico de pastel
     # Graficar en un gráfico de pastel
+    mean_by_gender = df_selecionado.groupby('JobTitle').size().mean()
+
     fig = px.bar(grouped, x='JobTitle', y='Count', color='Gender', 
              title='Conteo por género en cada tipo de empleo',
              labels={'Gender': 'Género'},
              text='Count', 
              barmode='group',height=500)
+    # Agregar la línea de la media por género
+    fig.add_hline(y=mean_by_gender, line_dash="dash", annotation_text=f'Media: {mean_by_gender:.2f}', 
+                  annotation_position="bottom right")
 
+    fig.update_traces(texttemplate='%{text}', textposition='outside')
     fig.update_traces(texttemplate='%{text}', textposition='outside') # Agregar el tipo de empleo como custom_data
     st.plotly_chart(fig, use_container_width=True,theme=theme_plotly)
 Gender_Jot_bar()
+
 
 
 def top_10_city_salario_max():
