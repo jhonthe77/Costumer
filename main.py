@@ -41,7 +41,7 @@ Department=st.sidebar.multiselect(
 Country=st.sidebar.multiselect(
     label='Filtre Por Pasí 🔎',
     options=df['Country'].unique(),
-    default=df['Country'].unique()[:2]
+    default=df['Country'].unique()[:1]
 )
 BusinessUnit=st.sidebar.multiselect(
     label='Filtre Por Unidad De Negocios 🔎',
