@@ -227,4 +227,5 @@ def top_10_maax_salario():
 top_10_maax_salario()
 
 
+st.markdown("<h1 style='text-align: center;'>Datos Utilizados</h1>", unsafe_allow_html=True)
 st.dataframe(df_selecionado)
