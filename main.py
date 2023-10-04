@@ -53,8 +53,13 @@ Gender=st.sidebar.multiselect(
     options=df['Gender'].unique(),
     default=df['Gender'].unique()[:2]
 )
+Ethnicity=st.sidebar.multiselect(
+    label='Filtre Por Etnicidad 🔎',
+    options=df['Ethnicity'].unique(),
+    default=df['Ethnicity'].unique()[:2]
+)
 
-df_selecionado= df.query('Department==@Department & Country==@Country & BusinessUnit==@BusinessUnit & Gender==@Gender')
+df_selecionado= df.query('Department==@Department & Country==@Country & BusinessUnit==@BusinessUnit & Gender==@Gender & Ethnicity==@Ethnicity')
 
 def metricas():
     max_salary_index = df_selecionado['AnnualSalary'].idxmax()
