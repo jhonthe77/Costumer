@@ -9,7 +9,6 @@ st.set_page_config('Panel De Análisis Empresarial',page_icon='📊',layout='wid
 
 st.subheader('Hecho Por Jhon Kerly Mosquera 🕵️‍♂️ Este panel se estara atualizando')
 st.markdown("<h1 style='text-align: center;'>Panel De Análisis Empresarial 📊</h1>", unsafe_allow_html=True)
-theme_plotly=None
 df =pd.read_csv('customers.csv')
 
 df['HireDate'] =pd.to_datetime(df['HireDate'])
@@ -31,6 +30,9 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
+
+
 
 df.set_index('id',inplace=True)
 st.sidebar.header('Filtar Los Datos 🔎')
@@ -54,11 +56,25 @@ Gender=st.sidebar.multiselect(
     options=df['Gender'].unique(),
     default=df['Gender'].unique()[:2]
 )
+def change_theme():
+    # Lista de temas disponibles
+    available_themes = ["streamlit", None]
+
+    # Solicitar al usuario que elija un tema
+    selected_theme = st.sidebar.selectbox("Selecciona un Tema", available_themes)
+
+    # Aplicar el tema seleccionado
+    st.sidebar.write(f"Aplicando el tema: {selected_theme}")
+    return selected_theme
+
+# Llamar a la función para cambiar el tema
+
 Ethnicity=st.sidebar.multiselect(
     label='Filtre Por Etnicidad 🔎',
     options=df['Ethnicity'].unique(),
     default=df['Ethnicity'].unique()[:]
 )
+theme_plotly=change_theme()
 
 df_selecionado= df.query('Department==@Department & Country==@Country & BusinessUnit==@BusinessUnit & Gender==@Gender & Ethnicity==@Ethnicity')
 
