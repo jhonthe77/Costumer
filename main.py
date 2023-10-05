@@ -64,7 +64,6 @@ def change_theme():
     selected_theme = st.sidebar.selectbox("Selecciona un Tema", available_themes)
 
     # Aplicar el tema seleccionado
-    st.sidebar.write(f"Aplicando el tema: {selected_theme}")
     return selected_theme
 
 # Llamar a la función para cambiar el tema
