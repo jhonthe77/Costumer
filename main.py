@@ -58,7 +58,7 @@ Gender=st.sidebar.multiselect(
 )
 def change_theme():
     # Lista de temas disponibles
-    available_themes = ["streamlit", None]
+    available_themes = [None,"streamlit"]
 
     # Solicitar al usuario que elija un tema
     selected_theme = st.sidebar.selectbox("Selecciona un Tema", available_themes)
