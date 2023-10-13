@@ -31,6 +31,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+st.sidebar.image('demandante-de-empleo.png', width=150)
 
 
 url_redireccion = "https://call-center-dataset-jhon.streamlit.app/"  # Reemplaza con tu URL
