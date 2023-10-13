@@ -33,7 +33,10 @@ st.markdown(
 
 
 
+url_redireccion = "https://call-center-dataset-jhon.streamlit.app/"  # Reemplaza con tu URL
 
+# Inserta un enlace en el sidebar que redirige a la URL especificada
+st.sidebar.markdown(f"[Ir a Proceso de Analisis]({url_redireccion})")
 df.set_index('id',inplace=True)
 st.sidebar.header('Filtar Los Datos 🔎')
 Department=st.sidebar.multiselect(
